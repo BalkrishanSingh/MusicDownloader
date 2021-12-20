@@ -1,5 +1,7 @@
 import os
 import youtube_dl
+from random import randint
+from time import sleep
 PATH = '/'.join(os.getcwd().split('/')[:3]) + "/Downloads/Music" #The Directory where the downloaded files will be saved.
 def download(video_info,PATH):
     """
@@ -35,6 +37,7 @@ def main():
     try:
         for video_info in videos_info['entries']:
             download(video_info,PATH)
+            sleep(randint(5,15))
     except KeyError:
         download(videos_info,PATH)
 
