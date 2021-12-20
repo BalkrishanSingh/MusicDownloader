@@ -6,11 +6,16 @@ def download(video_info,PATH):
     Will download a .wav audio file of a youtube video to the given path.
     """
     
-    filename = f"/{video_info['title']}.wav" #Format of the downloaded files
+    filename = f"/{video_info['title']}.mp3" #Format of the downloaded files
     options={
         'format':'bestaudio/best',
         'keepvideo':False,
         'outtmpl':PATH + filename,
+        'download_archive': PATH+ "/Archive",
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',}],
     }
     
     with youtube_dl.YoutubeDL(options) as ydl:
