@@ -16,6 +16,7 @@ def download(video_info,PATH):
         'download_archive': PATH+ "/Archive",
         'extractaudio':True,
         'audioformat':'mp3',
+        'cachedir': False,
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
