@@ -27,6 +27,18 @@ def download(video_info,PATH):
         ydl.download([video_info['webpage_url']])
     print(f"Download complete... {filename}")
 
+def if_not_exist(video_id,PATH):
+    """
+    it will return True, only if the given  video id doesn't already exist in the specified archive.
+    """
+    found = False
+    with open(PATH+ "/Archive",'r') as archive:
+        for line in archive:
+            id = line.strip().split()[1]
+            if video_id == id:
+                found = True
+        if not found:
+            return True
 def main():
     #Creates a Folder for storing all the files downloaded using this script if not one already exisitng.
     if not os.path.isdir(PATH):
@@ -37,8 +49,9 @@ def main():
     #Checking if it is a Playlist or a video.
     try:
         for video_info in videos_info['entries']:
-            download(video_info,PATH)
-            sleep(randint(5,15))
+            if if_not_exist(video_info['id'],PATH): #For Checking if this video has already been downloaded before.
+                download(video_info,PATH)
+                sleep(randint(5,15))
     except KeyError:
         download(videos_info,PATH)
 
