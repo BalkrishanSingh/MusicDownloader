@@ -34,17 +34,23 @@ def if_not_exist(video_id,PATH):
     found = False
     with open(PATH+ "/Archive",'r') as archive:
         for line in archive:
-            id = line.strip().split()[1]
-            if video_id == id:
-                found = True
+            if not line.isspace():
+                id = line.strip().split()[1]
+                if video_id == id:
+                    found = True
         if not found:
             return True
 def main():
+    options = {
+        'cachedir': False,
+        'sleep_interval': 2,
+        'max_sleep_interval': 5,
+    }
     #Creates a Folder for storing all the files downloaded using this script if not one already exisitng.
     if not os.path.isdir(PATH):
-        os.mkdir(PATH )
+        os.mkdir(PATH )  
     url = input("Enter a Youtube Video or Playlist link:")
-    videos_info = youtube_dl.YoutubeDL().extract_info(url = url,download=False)
+    videos_info = youtube_dl.YoutubeDL(options).extract_info(url = url,download=False)
     
     #Checking if it is a Playlist or a video.
     try:
