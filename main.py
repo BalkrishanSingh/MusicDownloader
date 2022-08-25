@@ -2,10 +2,10 @@ import os
 import youtube_dl
 from random import randint
 from time import sleep
-PATH = '/'.join(os.getcwd().split('/')[:3]) + "/Downloads/Music" #The Directory where the downloaded files will be saved.
+PATH = '/'.join(os.getcwd().split('/')[:3]) + "/Downloads/" #The Directory where the downloaded files will be saved.
 def download(video_info,PATH):
     """
-    Will download a .wav audio file of a youtube video to the given path.
+    Will download a .mp3 audio file of a youtube video to the given path.
     """
     
     filename = f"/{video_info['title']}.{video_info['ext']}" #Format of the downloaded files
